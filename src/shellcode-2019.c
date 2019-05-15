@@ -26,7 +26,7 @@ int main(){
 
     read( 0 , sc , 0x100 );
 
-    void (*ptr)() = ((*void)())mmap( NULL , 0x1000 , PROT_READ | PROT_EXEC , MAP_PRIVATE , 0 , 0 );
+    void (*ptr)() = ((void)(*)())mmap( NULL , 0x1000 , PROT_READ | PROT_EXEC , MAP_PRIVATE , 0 , 0 );
 
     memcpy( ptr , sc , 0x100 );
 
