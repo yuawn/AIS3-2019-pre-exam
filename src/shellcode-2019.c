@@ -11,14 +11,17 @@ void init(){
     setvbuf(stderr,0,2,0);
 }
 
+void enable_seccomp(){
+    scmp_filter_ctx ctx;
+	ctx = seccomp_init(SCMP_ACT_KILL);
+	seccomp_load(ctx);
+}
+
 
 int main(){
 
     init();
 
-    scmp_filter_ctx ctx;
-	ctx = seccomp_init(SCMP_ACT_KILL);
-	seccomp_load(ctx);
 
     char sc[0x100];
 
@@ -29,6 +32,8 @@ int main(){
     void (*ptr)() = (void(*)())mmap( NULL , 0x1000 , PROT_READ | PROT_EXEC , MAP_PRIVATE , 0 , 0 );
 
     memcpy( ptr , sc , 0x100 );
+
+    enable_seccomp();
 
     ptr();
 
