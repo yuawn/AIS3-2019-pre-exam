@@ -17,11 +17,23 @@ void enable_seccomp(){
 	seccomp_load(ctx);
 }
 
+char flag[0x100];
+
+void read_flag(){
+    int fd = open( "/home/shellcode-2019/flag" , O_RDONLY ); 
+    if( fd < 0 ){ 
+        printf("error\n"); 
+        _exit(1); 
+    }
+    read( fd , flag , 0x100 );
+    close( fd );
+}
 
 int main(){
 
     init();
 
+    read_flag()
 
     char sc[0x100];
 
@@ -31,7 +43,14 @@ int main(){
 
     void (*ptr)() = (void(*)())mmap( NULL , 0x1000 , PROT_READ | PROT_WRITE | PROT_EXEC , MAP_PRIVATE | MAP_ANONYMOUS , -1 , 0 );
 
+    if( ptr < 0 ){
+        puts( "mmap error" );
+        _exit(0);
+    }
+
     memcpy( ptr , sc , 0x100 );
+
+    puts( "Runing..." );
 
     enable_seccomp();
 
