@@ -13,9 +13,9 @@ char secret[0x10];
 int main(){
     init();
 
-    char buf[0x20];
+    char buf[0x40];
 
-    read( 0 , buf , 0x1f );
+    read( 0 , buf , 0x30 );
 
     printf( buf );
 
