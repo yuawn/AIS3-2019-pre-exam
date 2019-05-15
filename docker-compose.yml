@@ -14,3 +14,10 @@ services:
     - ./orw/xinetd:/etc/xinetd.d/orw:ro
    ports:
     - "10001:4597"
+  hello: 
+   build: ./hello/
+   volumes:
+    - ./hello/share:/home/hello:ro
+    - ./hello/xinetd:/etc/xinetd.d/hello:ro
+   ports:
+    - "10002:4597"

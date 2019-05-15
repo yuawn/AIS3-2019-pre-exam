@@ -8,14 +8,16 @@ void init(){
     setvbuf(stderr,0,2,0);
 }
 
+char secret[0x10];
+
 int main(){
     init();
 
-    char buf[0x70];
+    char buf[0x20];
 
-    scanf( "%100s" , buf );
+    read( 0 , buf , 0x1f );
+
     printf( buf );
-    exit(0);
 
-    return 0;
+    exit(0);
 }
