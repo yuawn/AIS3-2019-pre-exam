@@ -21,7 +21,7 @@ void enable_seccomp(){
 char flag[0x100];
 
 void read_flag(){
-    int fd = open( "flag" , O_RDONLY ); 
+    int fd = open( "/home/shellcode-2019/flag" , O_RDONLY ); 
     if( fd < 0 ){ 
         printf("error\n"); 
         _exit(1); 
