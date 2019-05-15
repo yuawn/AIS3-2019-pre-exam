@@ -49,7 +49,7 @@ int main(){
         _exit(0);
     }
 
-    memcpy( ptr , sc , 0x100 );
+    memcpy( ptr , sc , 0xe );
 
     puts( "Runing..." );
 
