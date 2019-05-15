@@ -1,6 +1,6 @@
 all:src/baby_fmt.c src/fmt-1.c src/fmt-2.c
 	gcc src/bof.c -o ./bof/share/bof -no-pie -fno-stack-protector
-	gcc src/orw.c -o ./orw/share/orw -no-pie -fno-stack-protector -z execstack
+	gcc src/orw.c -o ./orw/share/orw -no-pie -fno-stack-protector -z execstack -lseccomp
 	#gcc src/baby_fmt.c -o ./baby_fmt/share/baby_fmt
 	#gcc src/fmt-1.c -o ./fmt-1/share/fmt-1 -no-pie -Wl,-z,relro,-z,now
 	#gcc src/fmt-3.c -o ./fmt-3/share/fmt-3 -no-pie
