@@ -1,0 +1,58 @@
+version: '2'
+services:
+  baby_fmt: 
+   build: ./baby_fmt/
+   volumes:
+    - ./baby_fmt/share:/home/baby_fmt:ro
+    - ./baby_fmt/xinetd:/etc/xinetd.d/baby_fmt:ro
+   ports:
+    - "10000:4597"
+  fmt-1: 
+   build: ./fmt-1/
+   volumes:
+    - ./fmt-1/share:/home/fmt-1:ro
+    - ./fmt-1/xinetd:/etc/xinetd.d/fmt-1:ro
+   ports:
+    - "10001:4597"
+  fmt-2: 
+   build: ./fmt-2/
+   volumes:
+    - ./fmt-2/share:/home/fmt-2:ro
+    - ./fmt-2/xinetd:/etc/xinetd.d/fmt-2:ro
+   ports:
+    - "10002:4597"
+  fmt-3: 
+   build: ./fmt-3/
+   volumes:
+    - ./fmt-3/share:/home/fmt-3:ro
+    - ./fmt-3/xinetd:/etc/xinetd.d/fmt-3:ro
+   ports:
+    - "10003:4597"
+  printable: 
+   build: ./printable/
+   volumes:
+    - ./printable/share:/home/printable:ro
+    - ./printable/xinetd:/etc/xinetd.d/printable:ro
+   ports:
+    - "10004:4597"
+  uaf: 
+   build: ./uaf/
+   volumes:
+    - ./uaf/share:/home/uaf:ro
+    - ./uaf/xinetd:/etc/xinetd.d/uaf:ro
+   ports:
+    - "10005:4597"
+  tcache: 
+   build: ./tcache/
+   volumes:
+    - ./tcache/share:/home/tcache:ro
+    - ./tcache/xinetd:/etc/xinetd.d/tcache:ro
+   ports:
+    - "10006:4597"
+  baby_heap: 
+   build: ./baby_heap/
+   volumes:
+    - ./baby_heap/share:/home/baby_heap:ro
+    - ./baby_heap/xinetd:/etc/xinetd.d/baby_heap:ro
+   ports:
+    - "10007:4597"
