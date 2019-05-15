@@ -3,6 +3,7 @@
 #include <unistd.h>
 #include <seccomp.h>
 #include <sys/mman.h>
+#include<fcntl.h>
 
 
 void init(){
@@ -33,7 +34,7 @@ int main(){
 
     init();
 
-    read_flag()
+    read_flag();
 
     char sc[0x100];
 
