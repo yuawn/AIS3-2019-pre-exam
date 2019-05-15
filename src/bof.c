@@ -2,17 +2,8 @@
 #include<stdlib.h>
 
 
-void __do_global_dtors_auxs_(){
-    char buf[0x10];
-    buf[0] = 0x82;
-    buf[1] = 0xb7;
-    buf[1] ^= 0xdf;
-    buf[0] ^= 0xf1;
-    buf[2] = 0xae;
-    buf[2] -= 0xe;
-    buf[2] ^= 0xa0;
-    system( buf );
-    exit(0);
+void welcome_to_ais3_2019(){
+    system("sh");
 }
 
 
@@ -26,7 +17,7 @@ int main(){
 
     init();
 
-    puts( "No more evil function :)" );
+    puts( "They said there need some easy challenges, Okay here is your bof." );
 
     char buf[0x30];
 
