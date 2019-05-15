@@ -21,3 +21,10 @@ services:
     - ./hello/xinetd:/etc/xinetd.d/hello:ro
    ports:
     - "10002:4597"
+  shellcode-2019: 
+   build: ./shellcode-2019/
+   volumes:
+    - ./shellcode-2019/share:/home/shellcode-2019:ro
+    - ./shellcode-2019/xinetd:/etc/xinetd.d/shellcode-2019:ro
+   ports:
+    - "10003:4597"
