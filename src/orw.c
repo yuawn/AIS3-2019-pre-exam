@@ -10,6 +10,8 @@ void init(){
     setvbuf(stderr,0,2,0);
 }
 
+char sc[0x100];
+
 int main(){
 
     init();
@@ -22,10 +24,13 @@ int main(){
     seccomp_rule_add(ctx, SCMP_ACT_ALLOW, SCMP_SYS(write), 0);
 	seccomp_load(ctx);
 
+    puts( "Give me your shellcode>" );
 
-    puts( "They said there need some easy challenges, Okay here is your bof." );
+    read( 0 , sc , 0x100 );
 
-    char buf[0x30];
+    puts( "I give you bof, you know what to do :)" );
+
+    char buf[0x10];
 
     gets( buf );
 
