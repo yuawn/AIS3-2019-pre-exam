@@ -24,7 +24,7 @@ void init(){
 
 int main(){
 
-    init()
+    init();
 
     puts( "No more evil function :)" );
 
