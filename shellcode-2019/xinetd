@@ -10,6 +10,6 @@ service shellcode-2019
         port = 4597
         flags = REUSE
         per_source = 5
-        rlimit_cpu = 3
+        rlimit_cpu = 5
         nice = 18
 }
