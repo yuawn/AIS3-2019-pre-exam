@@ -44,7 +44,7 @@ int main(){
 
     if( len < 0 ){
         puts( "Hacks detected! abs() your len :)" );
-        len = abs( len );
+        len = (int)abs( len );
     }
 
     if( len > 0xff ){
