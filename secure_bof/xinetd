@@ -1,0 +1,15 @@
+service secure_bof
+{
+        disable = no
+        type = UNLISTED
+        wait = no
+        server = /home/secure_bof/run.sh
+        socket_type = stream
+        protocol = tcp
+        user = secure_bof
+        port = 4597
+        flags = REUSE
+        per_source = 5
+        rlimit_cpu = 3
+        nice = 18
+}

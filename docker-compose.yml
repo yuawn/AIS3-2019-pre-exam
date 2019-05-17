@@ -28,3 +28,10 @@ services:
     - ./shellcode-2019/xinetd:/etc/xinetd.d/shellcode-2019:ro
    ports:
     - "10003:4597"
+  secure_bof: 
+   build: ./secure_bof/
+   volumes:
+    - ./secure_bof/share:/home/secure_bof:ro
+    - ./secure_bof/xinetd:/etc/xinetd.d/secure_bof:ro
+   ports:
+    - "10004:4597"
