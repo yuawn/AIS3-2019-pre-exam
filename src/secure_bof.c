@@ -43,7 +43,7 @@ int main(){
     //size = read_int();
 
     if( len <= 0 ){
-        puts( "Hacks detected! abs() your len :)" );
+        puts( "[length <= 0] Hacks detected! abs() your len :)" );
         len = (int)abs( len );
     }
 
