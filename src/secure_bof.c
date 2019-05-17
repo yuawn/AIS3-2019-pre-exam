@@ -20,7 +20,7 @@ int main(){
 
     int size = read_int();
 
-    printf( "%d %d\n" , size , abs( size ) )
+    printf( "%d %d\n" , size , abs( size ) );
     
     
 
