@@ -21,7 +21,7 @@ void gen_canary(){
     for( int i = 0 ; i < 0x10 ; ++i ){
         saved_canary[i] = rand() & 0xff;
     }
-    puts( "[+]Generate secure random canary...done" )
+    puts( "[+]Generate secure random canary...done" );
 }
 
 int main(){
