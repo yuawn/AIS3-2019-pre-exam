@@ -29,6 +29,7 @@ int main(){
 
     char buf[0x100] , canary[0x10];
 
+    memset( canary , 0 , 0x10 );
     memset( buf , 0 , 0x100 );
 
     gen_canary();
