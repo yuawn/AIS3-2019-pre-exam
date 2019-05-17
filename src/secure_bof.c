@@ -27,13 +27,13 @@ void gen_canary(){
 int main(){
     init();
 
-    char buf[0x100] , canary[0x10];
+    char buf[0x110];
 
-    memset( canary , 0 , 0x10 );
-    memset( buf , 0 , 0x100 );
+    memset( buf , 0 , 0x110 );
 
     gen_canary();
-    memcpy( canary , saved_canary , 0x10 );
+    memcpy( buf + 0x100 , saved_canary , 0x10 );
+    //memcpy( canary , saved_canary , 0x10 );
 
     puts( "I have implemented the secure canary and OOB checking, I believe it's a really safe program :D" );
     puts( "Length of your input>" );
@@ -57,7 +57,7 @@ int main(){
 
     puts( "[+]Check for secure canary." );
 
-    if( strncmp( canary , saved_canary , 0x10 ) ){
+    if( strncmp( buf + 0x100 , saved_canary , 0x10 ) ){
         puts( "[ERROR] Overflow detected!" );
         _exit(-1);
     }
