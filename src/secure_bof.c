@@ -18,7 +18,9 @@ int main(){
 
     char buf[0x100];
 
-    long size = 
+    long size = 0x80000000;
+
+    printf( "%d %d\n" , size , abs( size ) )
     
 
     return 0;
