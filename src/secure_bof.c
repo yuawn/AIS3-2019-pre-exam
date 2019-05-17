@@ -20,7 +20,7 @@ int main(){
 
     long size = 0x80000000;
 
-    printf( "%d %d\n" , size , abs( size ) )
+    printf( "%d %d\n" , size , abs( size ) );
     
 
     return 0;
