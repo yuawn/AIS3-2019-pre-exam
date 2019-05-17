@@ -58,7 +58,7 @@ int main(){
     puts( "[+]Check for secure canary." );
 
     if( strncmp( buf + 0x100 , saved_canary , 0x10 ) ){
-        puts( "[ERROR] Overflow detected!" );
+        puts( "[Canary] Overflow detected!" );
         _exit(-1);
     }
     
