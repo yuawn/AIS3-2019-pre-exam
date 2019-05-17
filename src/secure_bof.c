@@ -27,7 +27,7 @@ void gen_canary(){
 int main(){
     init();
 
-    int len = 0 , zero = 0;
+    int len = 0;
     char buf[0x110];
 
     memset( buf , 0 , 0x110 );
@@ -42,7 +42,7 @@ int main(){
     scanf( "%d" , &len );
     //size = read_int();
 
-    if( len < zero ){
+    if( len <= 0 ){
         puts( "Hacks detected! abs() your len :)" );
         len = (int)abs( len );
     }
