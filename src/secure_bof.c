@@ -27,6 +27,7 @@ void gen_canary(){
 int main(){
     init();
 
+    int len = 0;
     char buf[0x110];
 
     memset( buf , 0 , 0x110 );
@@ -38,23 +39,22 @@ int main(){
     puts( "I have implemented the secure canary and OOB checking, I believe it's a really safe program :D" );
     puts( "Length of your input>" );
 
-    int size = 0;
-    scanf( "%d" , &size );
+    scanf( "%d" , &len );
     //size = read_int();
 
-    if( size < 0 ){
+    if( len < 0 ){
         puts( "Hacks detected! abs() your len :)" );
-        size = abs( size );
+        len = abs( len );
     }
 
-    if( size > 0xff ){
+    if( len > 0xff ){
         puts( "Too long!" );
-        size = 0xff;
+        len = 0xff;
     }
 
     puts( "Your input>" );
 
-    read( 0 , buf , size );
+    read( 0 , buf , len );
 
     puts( "[+]Check for secure canary." );
 
