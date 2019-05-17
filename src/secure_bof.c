@@ -38,7 +38,7 @@ int main(){
     puts( "I have implemented the secure canary and OOB checking, I believe it's a really safe program :D" );
     puts( "Length of your input>" );
 
-    int size;
+    int size , n;
     scanf( "%d" , &size );
     //size = read_int();
 
