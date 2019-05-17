@@ -31,14 +31,13 @@ int main(){
 
     memset( buf , 0 , 0x100 );
 
-    int size;
+    gen_canary();
+    memcpy( canary , saved_canary , 0x10 );
 
     puts( "I have implemented the secure canary and OOB checking, I believe it's a really safe program :D" );
     puts( "Length of your input>" );
 
-    gen_canary();
-    memcpy( canary , saved_canary , 0x10 );
-
+    int size;
     size = read_int();
 
     if( size < 0 ){
