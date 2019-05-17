@@ -39,7 +39,8 @@ int main(){
     puts( "Length of your input>" );
 
     int size;
-    size = read_int();
+    scanf( "%d" , &size );
+    //size = read_int();
 
     if( size < 0 ){
         puts( "Hacks detected! abs() your len :)" );
