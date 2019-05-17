@@ -27,7 +27,7 @@ void gen_canary(){
 int main(){
     init();
 
-    int len = 0;
+    int len = 0 , a = 0;
     char buf[0x110];
 
     memset( buf , 0 , 0x110 );
