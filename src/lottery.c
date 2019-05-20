@@ -10,7 +10,7 @@ void init(){
 }
 
 int rand(){
-    int ret;
+    unsigned int ret = 0;
     int fd = open( "/dev/urandom" , O_RDONLY ); 
     if( fd < 0 ){ 
         printf("error\n"); 
