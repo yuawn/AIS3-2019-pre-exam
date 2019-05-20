@@ -2,6 +2,7 @@
 #include<stdlib.h>
 #include<fcntl.h>
 
+
 void init(){
     setvbuf(stdout,0,2,0);
     setvbuf(stdin,0,2,0);
@@ -15,7 +16,7 @@ int rand(){
         printf("error\n"); 
         _exit(1); 
     }
-    read( fd , ret , 4 );
+    read( fd , &ret , 4 );
     close( fd );
 
     return ret % 49 + 1;
