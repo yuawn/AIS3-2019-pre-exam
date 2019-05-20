@@ -94,7 +94,8 @@ void box(){
                     break;
                 }
                 printf( "New things > " );
-                int ret = read( 0 , boxs[idx].buf , (unsigned char)( boxs[idx].size - 1 ) );
+                int ret = read( 0 , buf , (unsigned char)( boxs[idx].size - 1 ) );
+                memcpy( boxs[idx].buf , buf , ret );
                 puts( "Done!" );
                 break;
             case 3:
