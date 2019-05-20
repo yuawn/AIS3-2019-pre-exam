@@ -2,6 +2,7 @@
 #include<stdlib.h>
 #include<fcntl.h>
 
+//typedef signed char       int8_t;
 
 void init(){
     setvbuf(stdout,0,2,0);
@@ -54,7 +55,7 @@ void _register( char *pwd ){
 
 
 struct Box{
-    _int8_t size;
+    int8_t size;
     char buf[0x100];
 }
 
@@ -90,7 +91,7 @@ int main(){
                 }
                 printf( "Password : " );
                 read( 0 , buf , 0x90 );
-                if( strncmp( pwd , p , strlen( p ) ) ){
+                if( strncmp( buf , pwd , strlen( buf ) ) ){
                     puts( "Wrong password!" );
                     break;
                 }
@@ -101,7 +102,7 @@ int main(){
                 _exit(0);
                 break;
             default:
-                pust( "🤔🤔🤔🤔🤔" );
+                puts( "🤔🤔🤔🤔🤔" );
                 break;
         }
     }
