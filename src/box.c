@@ -79,7 +79,9 @@ void box(){
                 }
                 printf( "Put something into the box > " );
                 scanf( "%232s" , boxs[i].buf );
-                boxs[i].size = (int8_t) strlen( boxs[i].buf );
+                ret = strlen( boxs[i].buf );
+                if( ret < 2 ) ret = 2;
+                boxs[i].size = (int8_t) ret;
                 break;
             case 2:
                 puts( "Which box?" );
@@ -93,10 +95,7 @@ void box(){
                     break;
                 }
                 printf( "New things > " );
-                int old = strlen( boxs[idx].buf );
-                int ret = read( 0 , boxs[idx].buf , old );
-                int8_t d = old - ret;
-                boxs[idx].size -= d;
+                int ret = read( 0 , boxs[idx].buf , boxs[idx].size - 1 );
                 puts( "Done!" );
                 break;
             case 3:
