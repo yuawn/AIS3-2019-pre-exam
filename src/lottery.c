@@ -38,9 +38,11 @@ int main(){
 
 
     for( int i = 0 ; i < 6 ; ++i ){
-        a[i] = i;
-        //num[i] = rand();
+        //a[i] = i;
+        num[i] = rand();
     }
+
+    a[0] = 0x666;
 
 
     return 0;
