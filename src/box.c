@@ -41,15 +41,15 @@ void menu(){
     puts( "Your choice >" );
 }
 
-char usr[0x80] , buf[0x100];
+char usr[0x88] , buf[0x100];
 
 void _register( char *pwd ){
-    memset( usr , 0 , 0x80 );
-    memset( pwd , 0 , 0x80 );
+    memset( usr , 0 , 0x88 );
+    memset( pwd , 0 , 0x88 );
     printf( "Account: " );
-    read( 0 , usr , 0x7f );
+    read( 0 , usr , 0x80 );
     printf( "Password: " );
-    read( 0 , pwd , 0x7f );
+    read( 0 , pwd , 0x80 );
     puts( "Success!" );
 }
 
