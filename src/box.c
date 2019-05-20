@@ -92,14 +92,14 @@ int main(){
                 printf( "Login account: " );
                 len = read( 0 , buf , 0x98 );
                 buf[len] = '\0';
-                if( strncmp( buf , usr , len) ) ){
+                if( strncmp( buf , usr , len ) ){
                     puts( "No such user!" );
                     break;
                 }
                 printf( "Password : " );
                 len = read( 0 , buf , 0x98 );
                 buf[len] = '\0';
-                if( strncmp( buf , pwd , len ){
+                if( strncmp( buf , pwd , len ) ){
                     puts( "Wrong password!" );
                     break;
                 }
