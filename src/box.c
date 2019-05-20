@@ -81,6 +81,7 @@ int main(){
 
     while(1){
         menu();
+        int ret;
         int n = read_int();
 
         switch( n ){
@@ -89,14 +90,14 @@ int main(){
                 break;
             case 2:
                 printf( "Login account: " );
-                int ret = read( 0 , buf , 0x90 );
+                ret = read( 0 , buf , 0x90 );
                 buf[ret] = '\0';
                 if( strncmp( buf , usr , strlen( buf ) ) ){
                     puts( "No such user!" );
                     break;
                 }
                 printf( "Password : " );
-                int ret = read( 0 , buf , 0x90 );
+                ret = read( 0 , buf , 0x90 );
                 buf[ret] = '\0';
                 if( strncmp( buf , pwd , strlen( buf ) ) ){
                     puts( "Wrong password!" );
