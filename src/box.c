@@ -77,7 +77,7 @@ void box(){
                     puts( "No more box!" );
                     break;
                 }
-                printf( "Put something into the box >" );
+                printf( "Put something into the box > " );
                 scanf( "%232s" , boxs[i].buf );
                 boxs[i].size = (int8_t) strlen( boxs[i].buf );
                 break;
@@ -88,13 +88,13 @@ void box(){
                     puts( "Nop!" );
                     _exit(-1);
                 }
-                if( !boxs[idx].size ){
+                if( !strlen( boxs[idx].buf ) ){
                     puts( "No such box!" );
                     break;
                 }
-                printf( "New things >" );
+                printf( "New things > " );
                 int old = strlen( boxs[idx].buf );
-                int ret = read( 0 , boxs[idx].buf , boxs[idx].size );
+                int ret = read( 0 , boxs[idx].buf , old );
                 int8_t d = old - ret;
                 boxs[idx].size -= d;
                 puts( "Done!" );
@@ -114,6 +114,7 @@ void box(){
                     _exit(-1);
                 }
                 boxs[idx].size = 0;
+                memset( boxs[idx].buf , 0 , 0xe8 );
                 break;
             case 5:
                 puts( "Logout!" );
