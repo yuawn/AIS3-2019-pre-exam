@@ -18,18 +18,6 @@ int read_int(){
 
 
 
-int rand(){
-    unsigned int ret = 0;
-    int fd = open( "/dev/urandom" , O_RDONLY ); 
-    if( fd < 0 ){ 
-        printf("error\n"); 
-        _exit(1); 
-    }
-    read( fd , &ret , 4 );
-    close( fd );
-
-    return ret % 49 + 1;
-}
 
 void menu(){
     puts( "+-----------------------------+" );
@@ -116,14 +104,14 @@ int main(){
                 printf( "Login account: " );
                 len = read( 0 , buf , 0x98 );
                 buf[len] = '\0';
-                if( strncmp( buf , usr , len ) ){
+                if( memcmp( buf , usr , len ) ){
                     puts( "No such user!" );
                     break;
                 }
                 printf( "Password : " );
                 len = read( 0 , buf , 0x98 );
                 buf[len] = '\0';
-                if( strncmp( buf , pwd , len ) ){
+                if( memcmp( buf , pwd , len ) ){
                     puts( "Wrong password!" );
                     break;
                 }
