@@ -116,6 +116,7 @@ void box(){
                 memset( boxs[idx].buf , 0 , 0xe8 );
                 break;
             case 5:
+                memset( boxs , 0 , sizeof( boxs ) );
                 return;
             default:
                 puts( "🤔🤔🤔🤔🤔🤔" );
