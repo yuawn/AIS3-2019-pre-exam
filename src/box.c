@@ -116,7 +116,7 @@ void box(){
                 memset( boxs[idx].buf , 0 , 0xe8 );
                 break;
             case 5:
-                memcpy( usr , usr , 0x100 );
+                printf( "Logout!" );
                 return;
             default:
                 puts( "🤔🤔🤔🤔🤔🤔" );
