@@ -97,8 +97,8 @@ void box(){
                 break;
             case 3:
                 for( i = 0 ; i < 8 ; ++i ){
-                    if( boxs[i].size ){
-                        printf( "%232s\n" , boxs[i].buf );
+                    if( boxs[i].size > 0 && boxs[i].size < 0xe9 ){
+                        printf( "%s\n" , boxs[i].buf );
                     }
                 }
                 break;
