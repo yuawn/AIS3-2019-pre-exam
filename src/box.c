@@ -79,9 +79,8 @@ void box(){
                 }
                 printf( "Put something into the box > " );
                 scanf( "%232s" , boxs[i].buf );
-                ret = strlen( boxs[i].buf );
-                if( ret < 2 ) ret = 2;
-                boxs[i].size = (int8_t) ret;
+                if( strlen( boxs[i].buf ) < 2 ) boxs[i].size = 2;
+                esle boxs[i].size = strlen( boxs[i].buf );
                 break;
             case 2:
                 puts( "Which box?" );
