@@ -88,6 +88,10 @@ void box(){
                     puts( "Nop!" );
                     _exit(-1);
                 }
+                if( !boxs[idx].size ){
+                    puts( "No such box!" );
+                    break;
+                }
                 printf( "New things >" );
                 int old = strlen( boxs[idx].buf );
                 int ret = read( 0 , boxs[idx].buf , boxs[idx].size );
