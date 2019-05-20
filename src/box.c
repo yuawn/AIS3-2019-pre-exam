@@ -94,7 +94,9 @@ void box(){
                     break;
                 }
                 printf( "New things > " );
-                int ret = read( 0 , boxs[idx].buf , (int8_t)( boxs[idx].size - 1 ) );
+                boxs[i].size -= 1;
+                int ret = read( 0 , boxs[idx].buf , boxs[i].size );
+                boxs[i].size += 1;
                 puts( "Done!" );
                 break;
             case 3:
