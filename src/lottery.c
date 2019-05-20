@@ -33,7 +33,7 @@ int main(){
 
     init();
 
-    long num[6];
+    long num[6] , a[6];
 
     for( int i = 0 ; i < 6 ; ++i ){
         num[i] = rand();
