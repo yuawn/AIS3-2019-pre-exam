@@ -101,7 +101,7 @@ void box(){
                 break;
             case 3:
                 for( i = 0 ; i < 8 ; ++i ){
-                    if( boxs[i].size > 0 && boxs[i].size < 0xe9 ){
+                    if( boxs[i].size ){
                         printf( "[Box %d] %s\n" , i , boxs[i].buf );
                     }
                 }
