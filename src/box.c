@@ -56,7 +56,7 @@ void _register( char *pwd ){
 
 struct Box{
     int8_t size;
-    char buf[0x100];
+    char buf[0x100 - 0x18];
 };
 
 void box(){
