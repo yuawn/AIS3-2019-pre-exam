@@ -116,8 +116,10 @@ void box(){
                 memset( boxs[idx].buf , 0 , 0xe8 );
                 break;
             case 5:
-                write( 1 , "Logout" , 5 );
-                return;
+                printf( "Are you sure to logout? (yes/no):" );
+                read( 0 , buf , 0x80 );
+                if( !strncmp( buf , "yes" , 3 ) )
+                    return;
             default:
                 puts( "🤔🤔🤔🤔🤔🤔" );
                 break;
