@@ -42,28 +42,26 @@ void _register( char *pwd ){
 }
 
 void box_menu(){
-    puts( "1. a" );
-    puts( "2. b" );
-    puts( "3. Logout" );
+    puts( "1. new box" );
+    puts( "2. update box" );
+    puts( "3. view all box" );
+    puts( "4. delete box" );
+    puts( "5. Logout" );
     puts( "Your choice >" );
 }
 
 struct Box{
     int8_t size;
-    char buf[0x100 - 0x18];
+    char buf[0xe8];
 };
 
 void box(){
     puts( "Login successfully." );
 
+    int i;
     struct Box boxs[8];
 
-    boxs[6].size = 0x11;
-    boxs[7].size = 0x66;
-    for( int i = 0 ; i < 0x100 - 0x18 ; ++i ){
-        boxs[6].buf[i] = 'a';
-        boxs[7].buf[i] = 'b';
-    }
+    memset( boxs , 0 , sizeof( boxs ) );
 
     while(1){
         box_menu();
@@ -71,10 +69,48 @@ void box(){
 
         switch( n ){
             case 1:
+                for( i = 0 ; i < 8 ; ++i ){
+                    if( !boxs[i].size ) break;
+                }
+                if( i >= 8 ){
+                    puts( "No more box!" );
+                    break;
+                }
+                printf( "Put something into the box >" );
+                scanf( "%232s" , boxs[i].buf );
+                boxs[i].size = (int8_t) strlen( boxs[i].buf );
                 break;
             case 2:
+                puts( "Which box?" );
+                unsigned int idx = read_int();
+                if( idx >= 8 ){
+                    puts( "Nop!" );
+                    _exit(-1);
+                }
+                printf( "New things >" );
+                int old = strlen( boxs[idx].buf );
+                int ret = read( 0 , boxs[idx].buf , boxs[idx].size );
+                int8_t d = old - ret;
+                boxs[idx].size -= d;
+                puts( "Done!" );
                 break;
             case 3:
+                for( i = 0 ; i < 8 ; ++i ){
+                    if( boxs[i].size ){
+                        printf( "%232s\n" , boxs[i].buf );
+                    }
+                }
+                break;
+            case 4:
+                puts( "Which box?" );
+                unsigned int idx = read_int();
+                if( idx >= 8 ){
+                    puts( "Nop!" );
+                    _exit(-1);
+                }
+                boxs[i].size = 0;
+                break;
+            case 5:
                 puts( "Logout!" );
                 return;
             default:
