@@ -65,7 +65,7 @@ void box(){
 
     while(1){
         box_menu();
-        unsigned int idx
+        unsigned int idx;
         int n = read_int();
 
         switch( n ){
