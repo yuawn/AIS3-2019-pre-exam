@@ -40,9 +40,9 @@ int main(){
     for( int i = 0 ; i < 6 ; ++i ){
         //a[i] = i;
         num[i] = rand();
+        printf( "%p\n" , a[i] );
     }
 
-    a[0] = 0x666;
 
 
     return 0;
