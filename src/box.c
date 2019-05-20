@@ -65,7 +65,7 @@ void box(){
 
     boxs[6].size = 0x11;
     boxs[7].size = 0x66;
-    for( int i = 0 ; i < 0x100 ; ++i ){
+    for( int i = 0 ; i < 0x100 - 0x18 ; ++i ){
         boxs[6].buf[i] = 'a';
         boxs[7].buf[i] = 'b';
     }
