@@ -116,7 +116,7 @@ void box(){
                 memset( boxs[idx].buf , 0 , 0xe8 );
                 break;
             case 5:
-                printf( "Logout!" );
+                write( 1 , "Logout" , 5 );
                 return;
             default:
                 puts( "🤔🤔🤔🤔🤔🤔" );
