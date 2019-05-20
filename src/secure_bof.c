@@ -43,12 +43,12 @@ int main(){
     //size = read_int();
 
     if( len <= 0 ){
-        puts( "[length <= 0] Hacks detected! abs() your len :)" );
+        puts( "[length <= 0] Hacks detected! abs() the length :)" );
         len = (int)abs( len );
     }
 
     if( len > 0xff ){
-        puts( "Too long!" );
+        puts( "Too long! Reset the length :)" );
         len = 0xff;
     }
 
