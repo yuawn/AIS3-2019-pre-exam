@@ -80,7 +80,7 @@ void box(){
                 printf( "Put something into the box > " );
                 scanf( "%232s" , boxs[i].buf );
                 if( strlen( boxs[i].buf ) < 2 ) boxs[i].size = 2;
-                esle boxs[i].size = strlen( boxs[i].buf );
+                else boxs[i].size = strlen( boxs[i].buf );
                 break;
             case 2:
                 puts( "Which box?" );
