@@ -36,7 +36,9 @@ int main(){
 
     long num[6] , a[6];
 
+
     for( int i = 0 ; i < 6 ; ++i ){
+        a[i] = i;
         num[i] = rand();
     }
 
