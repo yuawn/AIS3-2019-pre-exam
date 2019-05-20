@@ -113,7 +113,7 @@ void box(){
                     puts( "Nop!" );
                     _exit(-1);
                 }
-                boxs[i].size = 0;
+                boxs[idx].size = 0;
                 break;
             case 5:
                 puts( "Logout!" );
