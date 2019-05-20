@@ -65,6 +65,7 @@ void box(){
 
     while(1){
         box_menu();
+        unsigned int idx
         int n = read_int();
 
         switch( n ){
@@ -82,7 +83,7 @@ void box(){
                 break;
             case 2:
                 puts( "Which box?" );
-                unsigned int idx = read_int();
+                idx = read_int();
                 if( idx >= 8 ){
                     puts( "Nop!" );
                     _exit(-1);
@@ -103,7 +104,7 @@ void box(){
                 break;
             case 4:
                 puts( "Which box?" );
-                unsigned int idx = read_int();
+                idx = read_int();
                 if( idx >= 8 ){
                     puts( "Nop!" );
                     _exit(-1);
