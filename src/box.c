@@ -53,6 +53,12 @@ void _register( char *pwd ){
     puts( "Success!" );
 }
 
+void box_menu(){
+    puts( "1. a" );
+    puts( "2. b" );
+    puts( "3. Logout" );
+    puts( "Your choice >" );
+}
 
 struct Box{
     int8_t size;
@@ -60,6 +66,7 @@ struct Box{
 };
 
 void box(){
+    puts( "Login successfully." );
 
     struct Box boxs[8];
 
@@ -70,6 +77,23 @@ void box(){
         boxs[7].buf[i] = 'b';
     }
 
+    while(1){
+        box_menu();
+        int n = read_int();
+
+        switch( n ){
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                puts( "Logout!" );
+                return;
+            default:
+                puts( "🤔🤔🤔🤔🤔🤔" );
+                break;
+        }
+    }
 
 }
 
