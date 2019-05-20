@@ -99,7 +99,7 @@ int main(){
                 printf( "Password : " );
                 len = read( 0 , buf , 0x98 );
                 buf[len] = '\0';
-                if( strncmp( buf , pwd , len ) ){
+                if( strncmp( buf , pwd , len ){
                     puts( "Wrong password!" );
                     break;
                 }
