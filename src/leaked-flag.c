@@ -18,7 +18,7 @@ void read_flag(){
         _exit(1); 
     }
 
-    read( fd , flag , 0x30 );
+    read( fd , flag , 34 );
 
     return;
 }
@@ -47,7 +47,7 @@ void main(){
 
     printf( "[OK] Your key is %s\n" , key );
 
-    for( int i = 0 ; i < 0x30; ++i ){
+    for( int i = 0 ; i < 34; ++i ){
         flag[i] ^= key[ i % 0x10 ] + rnd[ i % 0x10 ];
     }
 
