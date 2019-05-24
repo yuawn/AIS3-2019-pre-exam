@@ -53,4 +53,5 @@ void main(){
     read( 0 , s , n );
 
     asm( "xor %r10, %r10" );
+    asm( "xor %r8, %r8" );
 }
