@@ -12,7 +12,7 @@ void init(){
 char flag[0x100];
 
 void read_flag(){
-    int fd = open( "/home/flag/flag" , O_RDONLY ); 
+    int fd = open( "/home/leaked-flag/flag" , O_RDONLY ); 
     if( fd < 0 ){ 
         printf("error\n"); 
         _exit(1); 
