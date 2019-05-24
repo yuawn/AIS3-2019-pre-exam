@@ -31,7 +31,7 @@ void main(){
 
     char key[0x10] , rnd[0x18];
 
-    memeset( key , 0 , 0x28 );
+    memset( key , 0 , 0x28 );
 
     int fd = open( "/dev/urandom" , O_RDONLY ); 
     if( fd < 0 ){ 
