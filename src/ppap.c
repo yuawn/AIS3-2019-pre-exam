@@ -51,4 +51,6 @@ void main(){
 
     printf( "OK. Here is your bss overflow :) > " );
     read( 0 , s , n );
+
+    asm( "xor %r10, %r10" );
 }
