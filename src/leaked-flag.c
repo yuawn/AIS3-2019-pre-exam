@@ -46,7 +46,7 @@ void main(){
     printf( "[OK] Your key is %s\n" , key );
 
     for( int i = 0 ; i < 0x30; ++i ){
-        flag[i] ^= key[ i % 0x10 ] + rnd[ i % 0x10 ]
+        flag[i] ^= key[ i % 0x10 ] + rnd[ i % 0x10 ];
     }
 
     printf( "Your flag: %s" , flag );
