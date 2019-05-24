@@ -1,12 +1,12 @@
-service secure_bof
+service secure-bof
 {
         disable = no
         type = UNLISTED
         wait = no
-        server = /home/secure_bof/run.sh
+        server = /home/secure-bof/run.sh
         socket_type = stream
         protocol = tcp
-        user = secure_bof
+        user = secure-bof
         port = 4597
         flags = REUSE
         per_source = 5
