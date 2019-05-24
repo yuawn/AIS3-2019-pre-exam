@@ -29,7 +29,7 @@ void main(){
 
     read_flag();
 
-    char key[0x10] , rnd[0x10];
+    char key[0x10] , rnd[0x18];
 
     int fd = open( "/dev/urandom" , O_RDONLY ); 
     if( fd < 0 ){ 
