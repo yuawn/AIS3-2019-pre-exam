@@ -15,7 +15,7 @@ void main(){
     init();
 
     int n = 0;
-    char buf[0x18];
+    char buf[0x10];
 
     puts( "Stack overflow." );
     read( 0 , buf , 0x20 + 8 + 1 );
