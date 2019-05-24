@@ -8,6 +8,8 @@ void init(){
     setvbuf(stderr,0,2,0);
 }
 
+char s[0x10];
+
 void main(){
 
     init();
@@ -17,6 +19,9 @@ void main(){
 
     read( 0 , buf , 0x10 + 8 + 1 );
 
+    scanf( "%d" , &n );
+
+    read( 0 , s , n );
     
 
 }
