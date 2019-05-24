@@ -15,7 +15,7 @@ void main(){
     init();
 
     int n;
-    char buf[0x10];
+    char buf[0x18];
 
     read( 0 , buf , 0x10 + 8 + 1 );
 
