@@ -5,4 +5,5 @@ all:
 	gcc src/shellcode-2019.c -o ./shellcode-2019/share/shellcode-2019 -Wl,-z,relro,-z,now -lseccomp -s
 	gcc src/secure-bof.c -o ./secure-bof/share/secure-bof -Wl,-z,relro,-z,now -no-pie -fno-stack-protector -s
 	gcc src/box.c -o ./box/share/box -Wl,-z,relro,-z,now -s
-	gcc src/one.c -o ./one/share/one -fno-stack-protector -no-pie
+	gcc src/leaked-flag.c -o ./leaked-flag/share/leaked-flag
+	gcc src/ppap.c -o ./ppap/share/ppap -no-pie

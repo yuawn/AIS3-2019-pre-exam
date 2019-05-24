@@ -1,12 +1,12 @@
-service one
+service leaked-flag
 {
         disable = no
         type = UNLISTED
         wait = no
-        server = /home/one/run.sh
+        server = /home/leaked-flag/run.sh
         socket_type = stream
         protocol = tcp
-        user = one
+        user = leaked-flag
         port = 4597
         flags = REUSE
         per_source = 5
