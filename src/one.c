@@ -17,7 +17,7 @@ void main(){
     int n = 0;
     char buf[0x18];
 
-    read( 0 , buf , 0x10 + 8 + 1 );
+    read( 0 , buf , 0x20 + 8 + 1 );
 
     scanf( "%d" , &n );
 
