@@ -16,6 +16,18 @@ int read_int(){
     return atoi( buf );
 }
 
+int read_input(char *buf,unsigned int size){
+    int ret ;
+    ret = __read_chk(0,buf,size,size);
+    if(ret <= 0){
+        puts("read error");
+        _exit(1);
+    }
+    if(buf[ret-1] == '\n')
+        buf[ret-1] = '\x00';
+
+    return ret;
+}
 
 
 
@@ -94,7 +106,7 @@ void box(){
                     break;
                 }
                 printf( "New things > " );
-                int ret = read( 0 , buf , (unsigned char)( boxs[idx].size - 1 ) );
+                int ret = read_input( buf , (unsigned char)( boxs[idx].size - 1 ) );
                 memcpy( boxs[idx].buf , buf , ret );
                 puts( "Done!" );
                 break;
@@ -142,20 +154,19 @@ int main(){
                 break;
             case 2:
                 printf( "Login account: " );
-                len = read( 0 , buf , 0x98 );
-                buf[len] = '\0';
+                len = read_input( buf , 0x98 );
                 if( memcmp( buf , usr , len ) ){
                     puts( "No such user!" );
                     break;
                 }
                 printf( "Password : " );
-                len = read( 0 , buf , 0x98 );
-                buf[len] = '\0';
+                len = read_input( buf , 0x98 );
                 if( memcmp( buf , pwd , len ) ){
                     puts( "Wrong password!" );
                     break;
                 }
                 box();
+                
                 break;
             case 3:
                 puts( "Bye." );
