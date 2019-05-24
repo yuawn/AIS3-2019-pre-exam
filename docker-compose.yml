@@ -20,14 +20,14 @@ services:
     - ./leaked-flag/share:/home/leaked-flag:ro
     - ./leaked-flag/xinetd:/etc/xinetd.d/leaked-flag:ro
    ports:
-    - "10002:4597"
+    - "6666:4597"
   ppap: 
    build: ./ppap/
    volumes:
     - ./ppap/share:/home/ppap:ro
     - ./ppap/xinetd:/etc/xinetd.d/ppap:ro
    ports:
-    - "7777:4597"
+    - "10002:4597"
   hello: 
    build: ./hello/
    volumes:
