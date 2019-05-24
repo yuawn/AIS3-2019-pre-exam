@@ -35,9 +35,9 @@ void main(){
         puts( "1" );
         sleep( 0.5 );
 
-        puts( "I have stack overlfow." );
+        puts( "I have a stack overlfow." );
         sleep( 1 );
-        puts( "I have bss overlfow." );
+        puts( "I have a bss overlfow." );
         sleep( 1.5 );
         puts( "Uh!" );
         sleep( 1 );
@@ -51,5 +51,4 @@ void main(){
 
     printf( "OK. Here is your bss overflow :) > " );
     read( 0 , s , n );
-
 }
