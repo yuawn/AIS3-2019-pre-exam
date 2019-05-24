@@ -1,4 +1,4 @@
 #!/bin/bash
 #
 exec 2>/dev/null
-timeout 60 /home/box/box
+timeout 180 /home/box/box
