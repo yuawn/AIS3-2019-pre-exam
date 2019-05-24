@@ -14,20 +14,20 @@ services:
     - ./orw/xinetd:/etc/xinetd.d/orw:ro
    ports:
     - "10001:4597"
-  #leaked-flag: 
-  # build: ./leaked-flag/
-  # volumes:
-  #  - ./leaked-flag/share:/home/leaked-flag:ro
-  #  - ./leaked-flag/xinetd:/etc/xinetd.d/leaked-flag:ro
-  # ports:
-  #  - "10002:4597"
+  leaked-flag: 
+   build: ./leaked-flag/
+   volumes:
+    - ./leaked-flag/share:/home/leaked-flag:ro
+    - ./leaked-flag/xinetd:/etc/xinetd.d/leaked-flag:ro
+   ports:
+    - "6666:4597"
   ppap: 
    build: ./ppap/
    volumes:
     - ./ppap/share:/home/ppap:ro
     - ./ppap/xinetd:/etc/xinetd.d/ppap:ro
    ports:
-    - "10002:4597"
+    - "7777:4597"
   hello: 
    build: ./hello/
    volumes:
