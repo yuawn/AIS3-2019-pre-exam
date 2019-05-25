@@ -25,7 +25,7 @@ int read_input(char *buf,unsigned int size){
     }
     if(buf[ret-1] == '\n'){
         buf[ret-1] = '\x00';
-        ret -= 1;
+        //ret -= 1;
     }
 
 
