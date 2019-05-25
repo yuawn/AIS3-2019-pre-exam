@@ -56,7 +56,7 @@ services:
     - ./box/xinetd:/etc/xinetd.d/box:ro
    ports:
     - "10006:4597"
-  box++: 
+  box_plus_plus: 
    build: ./box++/
    volumes:
     - ./box++/share:/home/box++:ro
