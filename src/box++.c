@@ -23,8 +23,11 @@ int read_input(char *buf,unsigned int size){
         puts("read error");
         _exit(1);
     }
-    if(buf[ret-1] == '\n')
+    if(buf[ret-1] == '\n'){
         buf[ret-1] = '\x00';
+        ret - 1;
+    }
+
 
     return ret;
 }
