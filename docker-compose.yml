@@ -62,4 +62,4 @@ services:
     - ./box++/share:/home/box++:ro
     - ./box++/xinetd:/etc/xinetd.d/box++:ro
    ports:
-    - "10007:4597"
+    - "10008:4597"
