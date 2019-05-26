@@ -141,6 +141,7 @@ int main(){
     init();
 
     char pwd[0x80];
+    memset( pwd , 0 , 0x88 )
 
     while(1){
         menu();
