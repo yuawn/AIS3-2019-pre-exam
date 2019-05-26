@@ -6,5 +6,4 @@ all:
 	gcc src/secure-bof.c -o ./secure-bof/share/secure-bof -Wl,-z,relro,-z,now -no-pie -fno-stack-protector -s
 	gcc src/box.c -o ./box/share/box -Wl,-z,relro,-z,now -s
 	gcc src/box++.c -o ./box++/share/box++ -Wl,-z,relro,-z,now -s
-	gcc src/leaked-flag.c -o ./leaked-flag/share/leaked-flag
 	gcc src/ppap.c -o ./ppap/share/ppap -fno-stack-protector -no-pie
