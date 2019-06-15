@@ -1,5 +1,4 @@
 # AIS3 pre-exam 2019
-[TOC]
 ## Run
 * 想架起來玩，先編譯，再用 docker-compose 跑起來即可。
 ```sh
