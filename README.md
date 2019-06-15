@@ -22,7 +22,7 @@ docker-compose up --build -d
 ```
 &emsp;&emsp;透過 `objdump -d ./bof` 可以發現，main function 中使用 gets 來對 local variable char buffer 做輸入，而 gets 是完全不會檢查輸入長度限制的，而 buf 位於 `rbp-0x30` 的位置，意即 buf 的頭到儲存 `old rbp` 的距離為 0x30 ，這並不一定是你在 source code 中宣告的長度，有可能你宣告了 0x20 的 char buffer 而有其他 local variable，`rbp - 0x10` 可能放置其他的 local variable。
 
-&emsp;&emsp;所以我們只要將 0x30 的空隙填滿，再將存放 rbp 的 8 byte 蓋過去，就是我們的目標 return address 了(這部分原理還不熟的可以去參考 calling convention, stack frame)，至於 open shell 去讀取位於遠端主機上的 flag 檔案，你也可以透過反組譯發現一個奇怪的 function，理論上是不會被執行到的，沒有 function call 它：
+&emsp;&emsp;所以我們只要將 0x30 的空隙填滿，再將存放 rbp 的 8 byte 蓋過去，就是我們的目標 return address 了(這部分原理還不熟的可以參考 calling convention, stack frame)，至於 open shell 去讀取位於遠端主機上的 flag 檔案，也可以透過反組譯發現一個奇怪的 function，理論上是不會被執行到的，沒有 function call 它：
 ```nasm
 0000000000401152 <welcome_to_ais3_2019>:
   401152:	55                   	push   rbp
@@ -33,7 +33,7 @@ docker-compose up --build -d
   401163:	5d                   	pop    rbp
   401164:	c3                   	ret
 ```
-&emsp;&emsp;分析下去可以知道他傳入的第一個參數為 `"sh"` 字串，所以這題經典的 buffer overflow 題目的目標即為想辦法去執行到這個正常行為不會去執行到的函式，當你做最直接的作法去覆蓋 return address 成 `0x401152` 時，你會發現 crash 了，這題另一個重點來了，希望遇到問題能去 debug 找出問題發生點，以及原因，並解決他，透過 gdb 可以發現：
+&emsp;&emsp;分析下去可以知道他傳入的第一個參數為 `"sh"` 字串，所以這題經典的 buffer overflow 題目的目標即為想辦法去執行到這個正常行為不會去執行到的函式，當做最直接的作法去覆蓋 return address 成 `0x401152` 時，會發現 crash 了，這題另一個重點來了，希望遇到問題能去 debug 找出問題發生點，以及原因，並解決他，透過 gdb 可以發現：
 ```nasm
    0x7fb27b8462e6 <do_system+1078>:	movq   xmm0,QWORD PTR [rsp+0x8]
    0x7fb27b8462ec <do_system+1084>:	mov    QWORD PTR [rsp+0x8],rax
@@ -45,7 +45,7 @@ docker-compose up --build -d
    0x7fb27b846309 <do_system+1113>:	mov    edi,0x3
 [rsp+0x40] : 0x7fff3dc653d8 --> 0x0
 ```
-&emsp;&emsp;gdb 死在這行，很明顯你有成功 hijack 程式的執行流程，因為進到 system 中的 do_system funtion ，但是有些原因，在執行這行時 crash 了，這時候找到發生問題的點，便需要去了解發生原因，例如： register 的值是否正確，address 是否不合法等等，而這裡你也可以發現 rsp 是正常的 stack address，直接講結論就是，movaps 這個指令有要求當是處理 memory 操作且是 xmm 時，address 需要以 0x10-byte 做對齊(alignment)，（可以參考 [here](https://www.felixcloutier.com/x86/movaps)），可以看到此時 rsp 為 `0x7fff3dc653d8 - 0x40` ，是作 8 結尾，並不是 0x10 的倍數，而這就是原因。
+&emsp;&emsp;gdb 死在這行，很明顯有成功 hijack 程式的執行流程，因為進到 system 中的 do_system funtion ，但是有些原因，在執行這行時 crash 了，這時候找到發生問題的點，便需要去了解發生原因，例如： register 的值是否正確，address 是否不合法等等，而這裡我們也可以發現 rsp 是正常的 stack address，直接講結論就是，movaps 這個指令有要求當是處理 memory 操作且是 xmm 時，address 需要以 0x10-byte 做對齊(alignment)，（可以參考 [here](https://www.felixcloutier.com/x86/movaps)），可以看到此時 rsp 為 `0x7fff3dc653d8 - 0x40` ，是作 8 結尾，並不是 0x10 的倍數，而這就是原因。
 
 &emsp;&emsp;所以此時目標就很簡單了，只要在 stack 是對齊的時候執行這個 function 就行了，有很多種作法，任何只要確保符合不會 crash 的狀況就行：
 1. 直接跳到 `0x401156`，跳過 `push rbp` ，就不會使 stack 變成 8 結尾。
