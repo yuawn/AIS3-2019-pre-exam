@@ -158,14 +158,6 @@ sc = asm(
 #### AIS3{H0w_did_y0u_bypass_my_secure_program_:P}
 
 ### shellcode 2019 - 7 Solves
-Binary 保護機制全開。
-```
-    Arch:     amd64-64-little
-    RELRO:    Full RELRO
-    Stack:    Canary found
-    NX:       NX enabled
-    PIE:      PIE enabled
-```
 &emsp;&emsp;都 2019 了，shellcode 不能再那麼無趣了XD，這題把 flag 直接讀到 global，然後在 seccomp rules 全禁止 syscall 的條件下跑長度僅能為 0xe 的 shellcode，梗就是 side channel attack，shelloce 將 flag 每個字比較，例如猜第一個字是不是 a 或 b 或 c ...，如果對了，就進入無窮迴圈直到 timeout ，這樣就可以慢慢把 flag leak 出來了。
 
 [exploit.py](https://github.com/yuawn/ais3-2019-pre-exam/blob/master/exploit/shellcode-2019.py)
@@ -173,6 +165,15 @@ Binary 保護機制全開。
 #### AIS3{s1de_ch4nne1_at74ck!!!}
 
 ### box - 7 Solves
+Binary 保護機制全開。
+```
+    Arch:     amd64-64-little
+    RELRO:    Full RELRO
+    Stack:    Canary found
+    NX:       NX enabled
+    PIE:      PIE enabled
+    FORTIFY:  Enabled
+```
 TBD
 ### box++ - 415, 5 Solves
 TBD
