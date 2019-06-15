@@ -8,7 +8,7 @@ docker-compose up --build -d
 ```
 * 或 exploit 用 pwntools 的 process 直接 debug local binary 也行，不過需注意 local 環境與 remote 差異。
 ## Pwn - write-ups
-### bof - 139 Solves
+### 0x0. bof - 139 Solves
 > Tags: buffer overflow, debug 技巧
 
 &emsp;&emsp;因今年收到老師們決議，將 AIS3 pre-exam 與 MyFirst CTF 一同進行，所以前三題的題目難度設計的簡單許多，故將最典型的 bof 作為第一題簽到題，不過都 2019 了，還將 bof 做成題目實在是有點老掉牙，而這題剛好踩到一些點，讓你做最直接的作法，可能會遇到些 bug ，因此設計精神也包含了測驗解題者的 debug 能力，以及發現問題解決問題的思維。
@@ -58,7 +58,7 @@ docker-compose up --build -d
 
 #### AIS3{TOO0O0O0O0OO0O0OOo0o0o0o00_EASY}
 
-### orw - 67 Solves
+### 0x1. orw - 67 Solves
 > Tags: shellcoding, syscall
 
 Binary 保護機制：
@@ -128,7 +128,7 @@ sc = asm(
 
 #### AIS3{B4by_sh311c0d1ng_yeeeeeeeeeeeeeeeeeee_:)}
 
-### hello - 22 Solves
+### 0x2. hello - 22 Solves
 > Tags: format string attack, GOThijacking
 
 &emsp;&emsp;這題沒有 bof，不過很明顯有 fmt 的洞，這裡 fmt 的原理細節就不提了，這題有一次的 fmt 後，緊接著就 `exit(0)` 了，所以想要打下這題，必須先解決這個問題，因為 PIE 沒開，可以知道 exit GOT 得位置，且這題 RELRO 不是全開，所以 got table 可寫，利用第一次的 fmt 來將 main function address 寫入 exit got table，則 call exit 時，會跳至我們的 main function 如此就有一個無限的 fmt 利用機會了。
