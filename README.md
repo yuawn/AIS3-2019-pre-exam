@@ -131,7 +131,7 @@ sc = asm(
 ### hello - 22 Solves
 > Tags: format string attack, GOThijacking
 
-&emsp;&emsp;這題沒有 bof，不過很明顯有 fmt 的洞，這裡 fmt 的原理細節就不提了，這題有一次的 fmt 後，緊接著就 `exit(0)` 了，所以想要打下這題，必須先解決這個問題，因為 PIE 沒開，可以知道 exit GOT 得位置，且這題 RELRO 不是全開，所以 got table 可寫，利用第一次的 fmt 來將 main function address 寫入 exit got table，則 call exit 時，會跳至我們的 main function 如此就有一個無限的 fmt 利用機會了。
+&emsp;&emsp;這題沒有 bof，不過很明顯有 fmt 的洞，這裡 fmt 的原理細節就不提了，這題有一次的 fmt 後，緊接著就 `exit(0)` 了，所以想要打下這題，必須先解決這個問題，因為 PIE 沒開，可以知道 exit GOT 的位置，且這題 RELRO 不是全開，所以 got table 可寫，利用第一次的 fmt 來將 main function address 寫入 exit got table，則 call exit 時，會跳至我們的 main function 如此就有一個無限的 fmt 利用機會了。
 
 &emsp;&emsp;但是有個問題，可能會想說 got 裡是一個 libc address ，而 main `0x4006E8`，可能要單次 fmt 寫入多次，如果一次寫 4 byte，則需要輸出 0x4006E8 == 4196072 個字，很容易造成 exploit 不 stable 或是 IO chunk 被截斷等等，所以拆開來寫，可以增加 exploit 的穩定性，而剛好，exit 在還沒被呼叫前，got 裡面存的是 `0x400596` (想了解可以參考 lazy binding, dl_resolve 的機制)，所以我們只需要寫掉末兩 byte 即可，獲得無限次的 fmt 利用後，只需 leak libc，再將 printf got 填入 system，下一次輸入到 buf 的東西，原本應該 `printf( buf )` 則變成 `system( buf )`，輸入 sh 就能開 shell 了。
 
@@ -140,7 +140,7 @@ sc = asm(
 #### AIS3{fmt_4ttack_h0000o0ooo0o0k_ex1t}
 
 ### PPAP - 8 Solves
-&emsp;&emsp;小品題，只能 overflow 到 return address 一個 byte，intended solution 為蓋掉 main 原本 return 回 __libc_start_main 的 address 末一 byte，這樣有 0xff 個選擇，這裡除了可以跳到反組譯出來正常的 instruction 頭，也可以跳到中間，例如一個 5 byte 長的 instrution，直接跳到中間，後 3 個 byte 會解析出別的 instruction ，借此找到更多得 gadget，不過 intended solution 不需要這樣，直接蓋 `'\xe4'` ，return 到 syscall 上，而 rax 可以透過 read() 的 return value 來控制，例如 read 10 個 byte rax 為 10，而 rdi 會是 0，rsi 為我們可以輸入的 bss buffer，rdx 則為先前所輸入的 size ，將 rax 控成 322 ，輸入 `/bin/sh`，就可以執行 `execveat( 0, '/bin/sh', rdx, 0 , 0, 0)`， rdx 可為 0 或是指到一個存 0 的地方，所以將 size 輸入成 bss adress 即可，而題目故意設計將 `xor r10, r10; xor r8, r8` 嵌在 binary 中，也可以當成一種彩蛋提示。
+&emsp;&emsp;小品題，只能 overflow 到 return address 一個 byte，intended solution 為蓋掉 main 原本 return 回 __libc_start_main 的 address 末一 byte，這樣有 0xff 個選擇，這裡除了可以跳到反組譯出來正常的 instruction 頭，也可以跳到中間，例如一個 5 byte 長的 instrution，直接跳到中間，後 3 個 byte 會解析出別的 instruction ，借此找到更多得 gadget，不過 intended solution 不需要這樣，直接蓋 `'\xe4'` ，return 到 syscall 上，而 rax 可以透過 read() 的 return value 來控制，例如 read 10 個 byte rax 為 10，而 rdi 會是 0，rsi 為我們可以輸入的 bss buffer，rdx 則為先前所輸入的 size ，將 rax 控成 322 ，輸入 `/bin/sh`，就可以執行 `execveat( 0, '/bin/sh', rdx, 0, 0)`， rdx 可為 0 或是指到一個存 0 的地方，所以將 size 輸入成 bss adress 即可，而題目故意設計將 `xor r10, r10; xor r8, r8` 嵌在 binary 中，也可以當成一種彩蛋提示。
 
 &emsp;&emsp;另一種解法為，利用 rdx 可控，以及 return 到 `call [rdx+0x168]` 的 gadget，將 `leave; ret` gadget 放好，用`call [rdx+0x168]` 來 call 到 `leave; ret` 做 stack migration。
 
