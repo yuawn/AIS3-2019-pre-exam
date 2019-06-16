@@ -140,7 +140,7 @@ sc = asm(
 #### AIS3{fmt_4ttack_h0000o0ooo0o0k_ex1t}
 
 ### PPAP - 8 Solves
-&emsp;&emsp;小品題，只能 overflow 到 return address 一個 byte，intended solution 為蓋掉 main 原本 return 回 __libc_start_main 的 address 末一 byte，這樣有 0xff 個選擇，這裡除了可以跳到反組譯出來正常的 instruction 頭，也可以跳到中間，例如一個 5 byte 長的 instrution，直接跳到中間，後 3 個 byte 會解析出別的 instruction ，借此找到更多得 gadget，不過 intended solution 不需要這樣，直接蓋 `'\xe4'` ，return 到 syscall 上，而 rax 可以透過 read() 的 return value 來控制，例如 read 10 個 byte rax 為 10，而 rdi 會是 0，rsi 為我們可以輸入的 bss buffer，rdx 則為先前所輸入的 size ，將 rax 控成 322 ，輸入 `/bin/sh`，就可以執行 `execveat( 0, '/bin/sh', rdx, 0, 0)`， rdx 可為 0 或是指到一個存 0 的地方，所以將 size 輸入成 bss adress 即可，而題目故意設計將 `xor r10, r10; xor r8, r8` 嵌在 binary 中，也可以當成一種彩蛋提示。
+&emsp;&emsp;小品題，只能 overflow 到 return address 一個 byte，intended solution 為蓋掉 main 原本 return 回 __libc_start_main 的 address 末一 byte，這樣有 0xff 個選擇，這裡除了可以跳到反組譯出來正常的 instruction 頭，也可以跳到中間，例如一個 5 byte 長的 instrution，直接跳到中間，後 3 個 byte 會解析出別的 instruction ，借此找到更多得 gadget，不過 intended solution 不需要這樣，直接蓋 `'\xe4'` ，return 到 syscall 上，而 rax 可以透過 read() 的 return value 來控制，例如 read 10 個 byte rax 為 10，而 rdi 會是 0，rsi 為我們可以輸入的 bss buffer，rdx 則為先前所輸入的 size ，將 rax 控成 322 ，輸入 `/bin/sh`，就可以執行 `execveat( 0, '/bin/sh', rdx, 0, 0)`， rdx 可為 0 或是指到一個存 0 的地方，所以將 size 輸入成 bss address 即可，而題目故意設計將 `xor r10, r10; xor r8, r8` 嵌在 binary 中，也可以當成一種彩蛋提示。
 
 &emsp;&emsp;另一種解法為，利用 rdx 可控，以及 return 到 `call [rdx+0x168]` 的 gadget，將 `leave; ret` gadget 放好，用`call [rdx+0x168]` 來 call 到 `leave; ret` 做 stack migration。
 
