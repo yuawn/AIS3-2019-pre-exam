@@ -149,7 +149,7 @@ sc = asm(
 #### AIS3{Return_to_the_syscall_in_libc_PPAP_:D}
 
 ### Secure bof - 8 Solves
-&emsp;&emsp;類似 jail 題，眼前有一個 bof 但是跨不過去的感覺XD，這題如果發現要求輸入的長度為負數，意即以 unsigned 來看的話會是一個超大的數，會透過 abs() 來轉正，轉正後或原本就是正值，則會檢查不能大於 0xff，這正是 buf 的大小，所以無法 overflow，第一個點是，abs() compile 下去會變 inline 組語，就是做 2的補數運算來完成取正值，如果是輸入 0x80000000 == -2147483648，abs() 出來還是 0x80000000 ，而他因為是負的，所以不會被 `> 0xff` 檢查出來，此時就可以 overflow 了。
+&emsp;&emsp;類似 jail 題，眼前有一個 bof 但是跨不過去的感覺XD，這題如果發現要求輸入的長度為負數，意即以 unsigned 來看的話會是一個超大的數，會透過 abs() 來轉正，轉正後或原本就是正值，則會檢查不能大於 0xff，這正是 buf 的大小，所以無法 overflow，第一個點是，abs() compile 下去會變 inline 組語，就是做 2的補數運算來完成取正值，如果是輸入 0x80000000 == -2147483648，abs() 出來還是 0x80000000 ，而他因為是負的，所以不會被 `> 0x100` 檢查出來，此時就可以 overflow 了。
 
 &emsp;&emsp;但是第二個關卡是，這題自己實作了一個 canary 的保護機制，來檢查是否發生 overflow，canary 是 16 個 `rand() & 0xff` 產生的 byte，而這題是透過 `srand( time( NULL ) );` 的方式來生 seed ，對於同一 seed 隨機產生出來的數列是固定的，所以我們只要放入建立連線時，產生的相同 `time(0)` 值，即可知道這前 16 個隨機產生的數，將 canary 填一樣的回去，就可以正常的 overflow 了，後續就是典型的 ret2libc。
 
