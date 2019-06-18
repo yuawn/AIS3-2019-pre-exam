@@ -171,7 +171,7 @@ Output:
 ```
 
 
-&emsp;&emsp;獲得 overflow 後，會遇到第二個關卡是，這題自己實作了一個 canary 的保護機制，來檢查是否發生 overflow，canary 是 16 個 `rand() & 0xff` 產生的 byte，而這題是透過 `srand( time( NULL ) );` 的方式來生 seed ，對於同一 seed 隨機產生出來的數列是固定的，所以我們只要放入建立連線時，產生的相同 `time(0)` 值，即可知道這前 16 個隨機產生的數，將 canary 填一樣的回去，就可以正常的 overflow 了，後續就是典型的 ret2libc。
+&emsp;&emsp;這時候就成功 bypass abs() 獲得 overflow，不過會遇到第二個關卡，這題自己實作了一個 canary 的保護機制，來檢查是否發生 overflow，canary 是 16 個 `rand() & 0xff` 產生的 byte，而這題是透過 `srand( time( NULL ) );` 的方式來生 seed ，對於同一 seed 隨機產生出來的數列是固定的，所以我們只要放入建立連線時，產生的相同 `time(0)` 值，即可知道這前 16 個隨機產生的數，將 canary 填一樣的回去，就可以正常的 overflow 了，後續就是典型的 ret2libc。
 
 [exploit.py](https://github.com/yuawn/ais3-2019-pre-exam/blob/master/exploit/secure-bof.py)
 
