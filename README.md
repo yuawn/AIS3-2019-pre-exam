@@ -153,6 +153,8 @@ sc = asm(
 
 PoC:
 ```c
+// gcc (Ubuntu 7.4.0-1ubuntu1~18.04) 7.4.0
+// gcc poc.c -o poc
 #include<stdio.h>
 
 
